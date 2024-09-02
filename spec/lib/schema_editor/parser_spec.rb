@@ -12,4 +12,11 @@ RSpec.describe SchemaEditor::Parser do
       expect(result.keys).to eq(%w[users posts])
     end
   end
+
+  describe '.parse_foreign_keys' do
+    it "should have the good foreign keys" do
+      result = SchemaEditor::Parser.send(:parse_foreign_keys, file)
+      expect(result).to eq({ 'posts' => [ 'users' ] })
+    end
+  end
 end
