@@ -13,5 +13,15 @@ module SchemaEditor
       end
       tables
     end
+
+    def parse_foreign_keys(schema)
+      foreign_keys = {}
+      filtered_content = schema.scan(/add_foreign_key "(\w+)", "(\w+)"/)
+      filtered_content.each do |table_name, reference_table|
+        foreign_keys[table_name] ||= []
+        foreign_keys[table_name] << reference_table
+      end
+      foreign_keys
+    end
   end
 end
