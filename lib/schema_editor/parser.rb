@@ -1,6 +1,12 @@
 module SchemaEditor
   module Parser
     module_function
+
+    def extract(schema)
+      data = parse_tables(schema)
+      data[:foreign_keys] = parse_foreign_keys(schema)
+    end
+
     def parse_tables(schema)
       tables = {}
       filtered_content = schema.scan(/create_table "(\w+)", .*? do \|t\|([\s\S]*?)end/m)
@@ -23,5 +29,7 @@ module SchemaEditor
       end
       foreign_keys
     end
+
+    private_class_method(:parse_tables, :parse_foreign_keys)
   end
 end
