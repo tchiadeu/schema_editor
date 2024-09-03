@@ -1,4 +1,5 @@
 create_table "users", force: :cascade do |t|
+  t.integer "id"
   t.string "name"
   t.string "email"
   t.string "password"
@@ -7,6 +8,7 @@ create_table "users", force: :cascade do |t|
 end
 
 create_table "posts", force: :cascade do |t|
+  t.integer "id"
   t.string "title"
   t.text "body"
   t.integer "user_id"
