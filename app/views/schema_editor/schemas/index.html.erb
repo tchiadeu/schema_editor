@@ -1,53 +1,16 @@
-<%#= @schema %>
-<!-- app/views/schema_editor/schemas/index.html.erb -->
-<h1>Schema Editor</h1>
+  <% @schema.each do |key, value| %>
+    <% next if key == "foreign_keys" %>
 
-<h2>Tables</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Table Name</th>
-      <th>Columns</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @schema.each do |key, value| %>
-      <% next if key == "foreign_keys" %>
-      <tr>
-        <td><%= key %></td>
-        <td>
-          <ul>
-            <% value.each do |column_name, column_type| %>
-              <li><%= column_name %> (Type: <%= column_type %>)</li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
+    <%= tag.table style: "top: 50%; left: 50%;" do %>
+      <thead>
+        <tr><td><%= key %></td></tr>
+      </thead>
+      <tbody>
+        <% value.each_with_index do |(name, type), index| %>
+          <tr>
+            <%= tag.td "#{name} (type: #{type.capitalize})" %>
+          </tr>
+        <% end %>
+      </tbody>
     <% end %>
-  </tbody>
-</table>
-
-<h2>Foreign Keys</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Table Name</th>
-      <th>References</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @schema["foreign_keys"].each do |table_name, references| %>
-      <tr>
-        <td><%= table_name %></td>
-        <td>
-          <ul>
-            <% references.each do |reference| %>
-              <li><%= reference %></li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+  <% end %>
