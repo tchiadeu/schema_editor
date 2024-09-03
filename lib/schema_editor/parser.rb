@@ -4,7 +4,8 @@ module SchemaEditor
 
     def extract(schema)
       data = parse_tables(schema)
-      data[:foreign_keys] = parse_foreign_keys(schema)
+      data["foreign_keys"] = parse_foreign_keys(schema)
+      data
     end
 
     def parse_tables(schema)
