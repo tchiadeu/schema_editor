@@ -1,16 +1,16 @@
-  <% @schema.each do |key, value| %>
-    <% next if key == "foreign_keys" %>
+<% @schema.each do |key, value| %>
+  <% next if key == "foreign_keys" %>
 
-    <%= tag.table style: "top: 50%; left: 50%;" do %>
-      <thead>
-        <tr><td><%= key %></td></tr>
-      </thead>
-      <tbody>
-        <% value.each_with_index do |(name, type), index| %>
-          <tr>
-            <%= tag.td "#{name} (type: #{type.capitalize})" %>
-          </tr>
-        <% end %>
-      </tbody>
-    <% end %>
-  <% end %>
+  <table>
+    <thead>
+      <tr><td><%= key %></td></tr>
+    </thead>
+    <tbody>
+      <% value.each do |name, type| %>
+        <tr>
+          <%= tag.td "#{name} (type: #{type.capitalize})" %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
