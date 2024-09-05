@@ -7,10 +7,10 @@ function centerTable(table) {
 function possiblePositions(table) {
   const rect = table.getBoundingClientRect();
   return [
-    { right: `${window.innerWidth - rect.left + 10}px`, bottom: `${window.innerHeight - rect.top + 10}px` },  // Haut gauche
-    { left: `${rect.right + 10}px`, bottom: `${window.innerHeight - rect.top + 10}px` },                       // Haut droite
-    { left: `${rect.right + 10}px`, top: `${rect.bottom + 10}px` },                                            // Bas droite
-    { right: `${window.innerWidth - rect.left + 10}px`, top: `${rect.bottom + 10}px` }                         // Bas gauche
+    { right: `${window.innerWidth - rect.left + 10}px`, bottom: `${window.innerHeight - rect.top + 10}px` },
+    { left: `${rect.right + 10}px`, bottom: `${window.innerHeight - rect.top + 10}px` }, 
+    { left: `${rect.right + 10}px`, top: `${rect.bottom + 10}px` },
+    { right: `${window.innerWidth - rect.left + 10}px`, top: `${rect.bottom + 10}px` }
   ];
 };
 
