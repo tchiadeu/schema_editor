@@ -14,6 +14,10 @@
  *= require_self
  */
 
+/* body { */
+/*   overflow-x: scroll; */
+/* } */
+
 table {
   border-radius: 8px;
   width: fit-content;
@@ -21,7 +25,6 @@ table {
   border: solid 2px black;
   border-collapse: initial;
   position: absolute;
-  transform: translate(-50%, -50%);
 }
 
 thead td {
@@ -39,4 +42,8 @@ tbody tr:last-of-type td {
 tbody td {
   padding: 5px;
   border-bottom: dashed 1px gray;
+}
+
+td {
+  white-space: nowrap;
 }
