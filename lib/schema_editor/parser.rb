@@ -4,8 +4,10 @@ module SchemaEditor
 
     def extract(schema)
       data = parse_tables(schema)
-      data["foreign_keys"] = parse_foreign_keys(schema)
-      data
+      sorted_data = data.sort_by do |key, _value|
+        -(parse_foreign_keys(schema)[key] || 0)
+      end.to_h
+      sorted_data
     end
 
     def parse_tables(schema)
@@ -22,13 +24,16 @@ module SchemaEditor
     end
 
     def parse_foreign_keys(schema)
-      foreign_keys = {}
+      references = {}
       filtered_content = schema.scan(/add_foreign_key "(\w+)", "(\w+)"/)
-      filtered_content.each do |table_name, reference_table|
-        foreign_keys[table_name] ||= []
-        foreign_keys[table_name] << reference_table
+      filtered_content.each do |table|
+        if references.has_key?(table[1])
+          references[table[1]] += 1
+        else
+          references[table[1]] = 1
+        end
       end
-      foreign_keys
+      references
     end
 
     private_class_method(:parse_tables, :parse_foreign_keys)
