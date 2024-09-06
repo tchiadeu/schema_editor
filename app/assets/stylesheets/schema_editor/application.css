@@ -14,10 +14,6 @@
  *= require_self
  */
 
-/* body { */
-/*   overflow-x: scroll; */
-/* } */
-
 table {
   border-radius: 8px;
   width: fit-content;
@@ -25,26 +21,31 @@ table {
   border: solid 2px black;
   border-collapse: initial;
   position: absolute;
-  z-index: 5;
 }
 
-thead td {
+tbody {
+  display:table-cell;
+}
+
+th {
   padding: 5px;
   background-color: yellow;
   font-weight: bold;
   border-bottom: solid 1px black;
-  text-align: center;
+}
+
+td {
+  padding: 5px;
+  white-space: nowrap;
+  border-bottom: dashed 1px gray;
+  background-color: white;
 }
 
 tbody tr:last-of-type td {
   border-bottom: 0px;
 }
 
-tbody td {
-  padding: 5px;
-  border-bottom: dashed 1px gray;
-}
-
-td {
-  white-space: nowrap;
+.table-container {
+  position: absolute;
+  z-index: 10;
 }
