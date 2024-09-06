@@ -15,7 +15,8 @@ module SchemaEditor
     private
 
     def set_file
-      schema_path = Rails.root.join("spec", "fixtures", "schema.rb")
+      # schema_path = Rails.root.join("spec", "fixtures", "schema.rb")
+      schema_path = Rails.root.join("db", "schema.rb")
       File.read(schema_path)
     end
   end
