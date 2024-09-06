@@ -1,12 +1,19 @@
 <% @schema.each do |key, value| %>
   <table>
     <thead>
-      <tr><td><%= key %></td></tr>
+      <tr>
+        <%= tag.td key, data: { table: @references.include?(key) ? key : nil } %>
+      </tr>
     </thead>
     <tbody>
       <% value.each do |name, type| %>
         <tr>
-          <%= tag.td "#{name} (type: #{type.capitalize})" %>
+          <%= tag.td(
+            "#{name} (type: #{type.capitalize})",
+            data: {
+              reference: @references.include?(replace_id(name)) ? replace_id(name) : nil,
+            }
+          ) %>
         </tr>
       <% end %>
     </tbody>
