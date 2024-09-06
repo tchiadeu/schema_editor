@@ -3,12 +3,14 @@ require "schema_editor"
 module SchemaEditor
   class SchemasController < ApplicationController
     def index
-      @schema = Parser.extract(set_file)
-      @references = ReferencesFinder.filter(@schema).map { |column| replace_id(column) }
+      data = Parser.extract(set_file)
+      @schema = data[:tables]
+      foreign_keys = data[:foreign_keys]
+      @references = ReferencesFinder.filter(@schema, foreign_keys)
     end
 
     def replace_id(column)
-      column.gsub("_id", "s")
+      Formatter.transform(column)
     end
     helper_method :replace_id
 
