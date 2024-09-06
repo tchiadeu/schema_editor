@@ -1,21 +1,17 @@
-function svgCreator(namespace, path) {
+function svgCreator(namespace) {
   const svg = document.createElementNS(namespace, 'svg');
-  svg.style.zIndex = '-1';
-  svg.style.position = 'absolute';
-  svg.style.top = '0';
-  svg.style.left = '0';
-  svg.style.width = '100%';
-  svg.style.height = '100%';
+  svg.style.width = '5000px';
+  svg.style.height = '5000px';
   svg.style.pointerEvents = 'none';
-  svg.appendChild(path);
-  document.body.appendChild(svg);
+  document.body.insertAdjacentElement("afterbegin", svg);
 }
 
 function pathCreator(namespace, startX, startY, endX, endY) {
   const path = document.createElementNS(namespace, 'path');
   const pathData = `M${startX},${startY} Q${(startX + endX) / 2},${Math.min(startY, endY) - 50} ${endX},${endY}`;
   path.setAttribute('d', pathData);
-  path.setAttribute('stroke', 'black');
+  path.setAttribute('stroke', '#010');
+  path.setAttribute('stroke-width', '2');
   path.setAttribute('fill', 'none');
   return path;
 }
@@ -41,16 +37,17 @@ function shortDistanceSelector(firstLeft, firstRight, secondLeft, secondRight) {
     hashConstructor(firstRight, secondRight),
     hashConstructor(firstRight, secondLeft)
   ];
-  const shortestDistance = distances.reduce((min, current) => {
+  return distances.reduce((min, current) => {
     return current.result < min.result ? current : min;
   });
-  return shortestDistance; 
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   const idColumns = Array.from(document.querySelectorAll('td[data-reference]'));
-  const tableTitles = Array.from(document.querySelectorAll('td[data-table]'));
+  const tableTitles = Array.from(document.querySelectorAll('th[data-table]'));
   const svgNamespace = 'http://www.w3.org/2000/svg';
+  svgCreator(svgNamespace)
+  const svg = document.querySelector('svg')
 
   idColumns.forEach((column) => {
     const reference = column.dataset.reference;
@@ -67,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const endX = shortDistance.endX;
     const endY = tablePositions.middleY;
 
-    svgCreator(svgNamespace, pathCreator(svgNamespace, startX, startY, endX, endY));
+    svg.appendChild(pathCreator(svgNamespace, startX, startY, endX, endY));
   });
 });
 
