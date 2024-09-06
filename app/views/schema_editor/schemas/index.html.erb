@@ -2,7 +2,12 @@
   <table>
     <thead>
       <tr>
-        <%= tag.td key, data: { table: @references.include?(key) ? key : nil } %>
+        <%= tag.th(
+          key,
+          data: {
+            table: @references.map { |r| replace_id(r) }.include?(key) ? key : nil,
+          }
+        ) %>
       </tr>
     </thead>
     <tbody>
@@ -11,7 +16,7 @@
           <%= tag.td(
             "#{name} (type: #{type.capitalize})",
             data: {
-              reference: @references.include?(replace_id(name)) ? replace_id(name) : nil,
+              reference: @references.include?(name) ? replace_id(name) : nil,
             }
           ) %>
         </tr>
