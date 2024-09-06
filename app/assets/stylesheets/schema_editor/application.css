@@ -25,6 +25,7 @@ table {
   border: solid 2px black;
   border-collapse: initial;
   position: absolute;
+  z-index: 5;
 }
 
 thead td {
