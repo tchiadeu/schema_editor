@@ -1,7 +1,14 @@
 function centerTable(table) {
+  console.log(window.innerHeight)
+  console.log(table.getBoundingClientRect().height)
   table.style.left = '50%';
-  table.style.top = '50%';
-  table.style.transform = 'translate(-50%, -50%)'
+  if (window.innerHeight < table.getBoundingClientRect().height) {
+    table.style.top = '10px';
+    table.style.transform = 'translateX(-50%)';
+  } else {
+    table.style.top = '50%';
+    table.style.transform = 'translate(-50%, -50%)';
+  }
 };
 
 function possiblePositions(table) {
