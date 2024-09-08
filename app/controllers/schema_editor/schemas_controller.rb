@@ -2,6 +2,8 @@ require "schema_editor"
 
 module SchemaEditor
   class SchemasController < ApplicationController
+    before_action :raise_error?
+    
     def index
       data = Parser.extract(set_file)
       @schema = data[:tables]
@@ -20,6 +22,10 @@ module SchemaEditor
       # schema_path = Rails.root.join("spec", "fixtures", "schema.rb")
       schema_path = Rails.root.join("db", "schema.rb")
       File.read(schema_path)
+    end
+
+    def raise_error?
+      raise "Schema Editor must run in dev env" if Rails.env.production?
     end
   end
 end
