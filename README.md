@@ -11,7 +11,7 @@ gem "schema_editor", git: "git@github.com:tchiadeu/schema_editor.git"
 
 And then execute:
 ```bash
-$ bundle install
+bundle install
 ```
 
 Then add the following code into your `routes`:
