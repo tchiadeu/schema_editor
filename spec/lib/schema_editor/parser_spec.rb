@@ -23,8 +23,8 @@ RSpec.describe SchemaEditor::Parser do
   describe '.extract' do
     it 'should order the hash by reference occurrences' do
       result = SchemaEditor::Parser.extract(file)
-      expect(result.keys[0]).to eq('users')
-      expect(result.keys[1]).to eq('posts')
+      expect(result[:tables].keys[0]).to eq('users')
+      expect(result[:tables].keys[1]).to eq('posts')
     end
   end
 end
