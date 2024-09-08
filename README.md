@@ -1,28 +1,32 @@
 # SchemaEditor
-Short description and motivation.
-
-## Usage
-How to use my plugin.
+For visualize your Rails Apps DB.
+You can find all the tables of your DB and their associated columns.
 
 ## Installation
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "schema_editor"
+gem "schema_editor", git: "git@github.com:tchiadeu/schema_editor.git"
 ```
 
 And then execute:
 ```bash
-$ bundle
+bundle install
 ```
 
-Or install it yourself as:
+Then add the following code into your `routes`:
+```ruby
+mount SchemaEditor::Engine => "/schema_editor" if Rails.env.development?
+```
+
+## Usage
+Find the tool here:
 ```bash
-$ gem install schema_editor
+http://localhost:3000/schema_editor
 ```
 
 ## Contributing
-Contribution directions go here.
+Feel free to make a PR if you want to contribute to this little project.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
