@@ -1,6 +1,4 @@
 function centerTable(table) {
-  console.log(window.innerHeight)
-  console.log(table.getBoundingClientRect().height)
   table.style.left = '50%';
   if (window.innerHeight < table.getBoundingClientRect().height) {
     table.style.top = '10px';
@@ -69,7 +67,9 @@ function placeTables(tables) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  const tables = document.getElementsByTagName('table');
-  placeTables(tables);
-});
+export function setTablePositions() {
+  document.addEventListener('DOMContentLoaded', function() {
+    const tables = document.getElementsByTagName('table');
+    placeTables(tables);
+  });
+}
