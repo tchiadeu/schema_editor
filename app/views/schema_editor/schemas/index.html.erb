@@ -17,6 +17,7 @@
             "#{name} (type: #{type.capitalize})",
             data: {
               reference: @references.include?(name) ? replace_id(name) : nil,
+              column: name, table: key
             }
           ) %>
         </tr>
