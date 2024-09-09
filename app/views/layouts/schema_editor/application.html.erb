@@ -7,8 +7,7 @@
 
   <%= yield :head %>
   <%= stylesheet_link_tag "schema_editor/application", media: "all" %>
-  <%= javascript_include_tag "schema_editor/table" %>
-  <%= javascript_include_tag "schema_editor/references" %>
+  <%= javascript_include_tag "schema_editor/application", type: "module" %>
 </head>
 <body>
   <%= yield %>
