@@ -1,27 +1,35 @@
-<% @schema.each do |key, value| %>
-  <table>
-    <thead>
-      <tr>
-        <%= tag.th(
-          key,
-          data: {
-            table: @references.map { |r| replace_id(r) }.include?(key) ? key : nil,
-          }
-        ) %>
-      </tr>
-    </thead>
-    <tbody>
-      <% value.each do |name, type| %>
+<%= tag.div(
+  data: {
+    custom_position: custom_position?
+  }
+) do %>
+  <% @schema.each do |key, value| %>
+    <%= tag.table(
+        style: style_table(key)
+    ) do %>
+      <thead>
         <tr>
-          <%= tag.td(
-            "#{name} (type: #{type.capitalize})",
+          <%= tag.th(
+            key,
             data: {
-              reference: @references.include?(name) ? replace_id(name) : nil,
-              column: name, table: key
+              table: @references.map { |r| replace_id(r) }.include?(key) ? key : nil,
             }
           ) %>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% value.each do |name, type| %>
+          <tr>
+            <%= tag.td(
+              "#{name} (type: #{type.capitalize})",
+              data: {
+                reference: @references.include?(name) ? replace_id(name) : nil,
+                column: name, table: key
+              }
+            ) %>
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
+  <% end %>
 <% end %>

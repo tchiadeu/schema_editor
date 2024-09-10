@@ -1,4 +1,5 @@
 import { shortDistanceSelector, setPathPositionAttribute, getPositions } from "./link_position";
+import { updateAllTables } from "./update_position";
 
 function findAssociatedPaths(table) {
   const headerName = table.querySelector('th').dataset.table;
@@ -46,6 +47,7 @@ function moveTables(tables) {
     header.addEventListener('mousedown', (event) => {
       isDragging = true;
       table.style.zIndex = '5';
+      table.style.transform = null;
       startX = event.clientX;
       startY = event.clientY;
       const tableRect = table.getBoundingClientRect();
@@ -68,14 +70,15 @@ function moveTables(tables) {
         isDragging = false;
         document.body.style.userSelect = '';
         table.style.zIndex = null;
-      }
+        updateAllTables(tables);
+      };
     });
   });
 }
 
 export function dragAndDropTables() {
   document.addEventListener('DOMContentLoaded', function() {
-    const tables = document.querySelectorAll('table');
+    const tables = Array.from(document.getElementsByTagName('table'));
     moveTables(tables);
   });
 }

@@ -69,6 +69,11 @@ function placeTables(tables) {
 
 export function setTablePositions() {
   document.addEventListener('DOMContentLoaded', function() {
+    const tablesContainer = document.querySelector("div[data-custom-position]");
+    const isCustomPosition = tablesContainer.dataset.customPosition === "true";
+    if (isCustomPosition) {
+      return;
+    }
     const tables = document.getElementsByTagName('table');
     placeTables(tables);
   });
