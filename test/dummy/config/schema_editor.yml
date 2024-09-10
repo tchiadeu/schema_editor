@@ -1,0 +1,17 @@
+custom_positions: true
+positions:
+  users:
+    top: 67
+    left: 40.25
+  posts:
+    top: 26
+    left: 614.7396240234375
+  comments:
+    top: 133
+    left: 935.7396240234375
+  articles:
+    top: 339
+    left: 638.7708740234375
+  tests:
+    top: 345
+    left: 306.22918701171875
