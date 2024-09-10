@@ -3,9 +3,9 @@ require "schema_editor"
 module SchemaEditor
   class SchemasController < ApplicationController
     before_action :raise_error?
-    
+
     def index
-      data = Parser.extract(set_file)
+      data = DBParser.extract
       @schema = data[:tables]
       foreign_keys = data[:foreign_keys]
       @references = ReferencesFinder.filter(@schema, foreign_keys)
@@ -16,13 +16,21 @@ module SchemaEditor
     end
     helper_method :replace_id
 
-    private
+    def style_table(table)
+      positions = ConfigParser.extract["positions"]
+      return nil unless positions
 
-    def set_file
-      # schema_path = Rails.root.join("spec", "fixtures", "schema.rb")
-      schema_path = Rails.root.join("db", "schema.rb")
-      File.read(schema_path)
+      table_positions = positions[table.to_s]
+      "top: #{table_positions["top"]}px; left: #{table_positions["left"]}px"
     end
+    helper_method :style_table
+
+    def custom_position?
+      ConfigParser.extract["custom_positions"]
+    end
+    helper_method :custom_position?
+
+    private
 
     def raise_error?
       raise "Schema Editor must run in dev env" if Rails.env.production?
