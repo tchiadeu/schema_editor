@@ -7,7 +7,7 @@ namespace :schema_editor do
       puts "File config/schema_editor.yml already exists"
     else
       File.open(config_path, "w") do |file|
-        file.write({ custom_positions: false }.to_yaml.sub(/^---\s*/, ""))
+        file.write({ "custom_positions" => false }.to_yaml.sub(/^---\s*/, ""))
       end
       puts "File config/schema_editor.yml has been generate"
     end
