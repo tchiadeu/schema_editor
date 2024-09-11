@@ -19,6 +19,11 @@ Then add the following code into your `routes`:
 mount SchemaEditor::Engine => "/schema_editor" if Rails.env.development?
 ```
 
+Finaly exec this command in your bash to setup the config :
+```bash
+rake schema_editor:generate_config
+```
+
 ## Usage
 Find the tool here:
 ```bash
