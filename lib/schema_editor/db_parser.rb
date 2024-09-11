@@ -39,8 +39,8 @@ module SchemaEditor
 
     def set_schema
       File.read(
-        Rails.root.join("spec", "fixtures", "schema.rb")
-        # Rails.root.join("db", "schema.rb")
+        # Rails.root.join("spec", "fixtures", "schema.rb")
+        Rails.root.join("db", "schema.rb")
       )
     end
 
